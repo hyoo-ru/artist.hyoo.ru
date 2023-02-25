@@ -19,8 +19,8 @@ jobs:
         token: ${{ secrets.GH_PAT }}
         package: 'hyoo/artist'
     
-    - uses: JS-DevTools/npm-publish@v1
-      if: ${{ github.ref == 'refs/heads/master' }}
+    - uses: alex-page/blazing-fast-gh-pages-deploy@v1.1.0
+      if: github.ref == 'refs/heads/master'
       with:
-        token: ${{ secrets.NPM_AUTH_TOKEN }}
-        package: ./hyoo/artist/-/package.json
+        repo-token: ${{ secrets.GH_PAT }}
+        site-directory: 'hyoo/artist/-'

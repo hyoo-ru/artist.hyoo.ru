@@ -3736,6 +3736,9 @@ var $;
 var $;
 (function ($) {
     class $hyoo_artist extends $mol_stack {
+        title() {
+            return "Artificial Artist";
+        }
         sub() {
             return [
                 this.External()

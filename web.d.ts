@@ -1008,6 +1008,7 @@ declare namespace $.$$ {
 
 declare namespace $ {
     class $hyoo_artist extends $mol_stack {
+        title(): string;
         sub(): readonly any[];
         External(): $$.$mol_frame;
     }

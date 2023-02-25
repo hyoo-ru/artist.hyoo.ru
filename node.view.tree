@@ -60,6 +60,7 @@ $mol_frame $mol_embed_native
 	pip true
 
 $hyoo_artist $mol_stack
+	title \Artificial Artist
 	sub /
 		<= External $mol_frame
 			uri \https://jin-nin-artist.hf.space/

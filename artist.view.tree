@@ -1,3 +1,4 @@
 $hyoo_artist $mol_stack
-	<= External $mol_frame
-		uri \https://jin-nin-artist.hf.space/
+	sub /
+		<= External $mol_frame
+			uri \https://jin-nin-artist.hf.space/

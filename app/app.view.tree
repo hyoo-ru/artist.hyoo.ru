@@ -1,8 +1,8 @@
 $hyoo_artist_app $mol_page
-	title \Artificial Artist
+	title @ \Artificial Artist
 	query? \
 	Title <= Query $mol_search
-		hint \a kitten has cauched the dragon
+		hint @ \a kitten has cauched the dragon
 		query? <=> query_changed? \
 		submit? <=> imagine? null
 	tools /
@@ -10,8 +10,9 @@ $hyoo_artist_app $mol_page
 			value? <=> index? 0
 			backward? => backward?
 			forward? => forward?
-	Body <= Image $mol_image
-		uri <= image \
+	body /
+		<= Image $mol_image
+			uri <= image \
 	plugins /
 		<= Hotkey $mol_hotkey key *
 			pageUp? <=> backward?

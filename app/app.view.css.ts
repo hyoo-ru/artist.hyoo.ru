@@ -8,6 +8,10 @@ namespace $.$$ {
 			},
 		},
 		
+		Body: {
+			padding: 0,
+		},
+		
 		Image: {
 			objectFit: 'contain',
 			flex: {

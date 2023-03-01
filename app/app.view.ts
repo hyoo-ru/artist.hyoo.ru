@@ -34,6 +34,7 @@ namespace $.$$ {
 		
 		@ $mol_mem
 		prompt() {
+			if( !this.index() ) return this.query_en()
 			return `${ this.query_en() }, ${ this.index() }`
 		}
 		

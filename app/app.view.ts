@@ -39,6 +39,7 @@ namespace $.$$ {
 		
 		@ $mol_mem
 		image() {
+			if( !this.query() ) return 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"/>'
 			return this.$.$hyoo_artist_imagine( this.prompt() )
 		}
 		

@@ -186,7 +186,8 @@
     "$mol_data_string",
     "$mol_fetch",
     "$mol_dom_parse",
-    "$hyoo_artist_imagine"
+    "$hyoo_artist_imagine",
+    "$mol_match"
   ],
   "dependencies": {
     "jsdom": "*",

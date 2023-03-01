@@ -339,6 +339,7 @@ $hyoo_artist_app $mol_page
 		hint @ \a kitten has cauched the dragon
 		query? <=> query_changed? \
 		submit? <=> imagine? null
+		suggests <= suggests /
 	tools /
 		<= Index $mol_paginator
 			value? <=> index? 0
@@ -354,3 +355,66 @@ $hyoo_artist_app $mol_page
 		<= Hotkey $mol_hotkey key *
 			pageUp? <=> backward?
 			pageDown? <=> forward?
+	artists /
+		\Yayoi Kusama
+		\Pablo Picasso
+		\Leonardo da Vinci
+		\Banksy
+		\Rembrandt
+		\Frida Kahlo
+		\Vincent van Gogh
+		\Henri Matisse
+		\Salvador Dali
+		\Claude Monet
+		\Andy Warhol
+		\Georgia O'Keeffe
+		\Jackson Pollock
+		\Marcel Duchamp
+		\Edward Hopper
+		\Willem de Kooning
+		\Mark Rothko
+		\David Hockney
+	art_styles /
+		\Anime
+		\Abstract
+		\Minimalist
+		\Cyberpunk
+		\Steampunk
+		\Organic
+		\Geometric
+		\Sci-Fi
+		\Futuristic
+		\Vaporwave
+		\Gothic
+		\oil on canvas
+		\chinese painting
+		\graffiti
+		\watercolour
+		\graphite
+		\cinematic
+		\film noir
+		\fluorescent
+		\moody lighting
+		\silhouette
+		\ultraviolet
+		\x-ray
+		\polaroid
+		\double exposure
+		\fisheye lens
+		\bokeh
+	art_moods /
+		\Joyful
+		\Light-Hearted
+		\Exciting
+		\Calming
+		\Soothing
+		\Playful
+		\Fun
+		\Bright
+		\Colourful
+		\Dynamic
+		\Energetic
+		\Passionate
+		\Romantic
+		\Vibrant
+		\Vivid

@@ -6916,6 +6916,78 @@ var $;
                 this.Hotkey()
             ];
         }
+        artists() {
+            return [
+                "Yayoi Kusama",
+                "Pablo Picasso",
+                "Leonardo da Vinci",
+                "Banksy",
+                "Rembrandt",
+                "Frida Kahlo",
+                "Vincent van Gogh",
+                "Henri Matisse",
+                "Salvador Dali",
+                "Claude Monet",
+                "Andy Warhol",
+                "Georgia O'Keeffe",
+                "Jackson Pollock",
+                "Marcel Duchamp",
+                "Edward Hopper",
+                "Willem de Kooning",
+                "Mark Rothko",
+                "David Hockney"
+            ];
+        }
+        art_styles() {
+            return [
+                "Anime",
+                "Abstract",
+                "Minimalist",
+                "Cyberpunk",
+                "Steampunk",
+                "Organic",
+                "Geometric",
+                "Sci-Fi",
+                "Futuristic",
+                "Vaporwave",
+                "Gothic",
+                "oil on canvas",
+                "chinese painting",
+                "graffiti",
+                "watercolour",
+                "graphite",
+                "cinematic",
+                "film noir",
+                "fluorescent",
+                "moody lighting",
+                "silhouette",
+                "ultraviolet",
+                "x-ray",
+                "polaroid",
+                "double exposure",
+                "fisheye lens",
+                "bokeh"
+            ];
+        }
+        art_moods() {
+            return [
+                "Joyful",
+                "Light-Hearted",
+                "Exciting",
+                "Calming",
+                "Soothing",
+                "Playful",
+                "Fun",
+                "Bright",
+                "Colourful",
+                "Dynamic",
+                "Energetic",
+                "Passionate",
+                "Romantic",
+                "Vibrant",
+                "Vivid"
+            ];
+        }
         query_changed(next) {
             if (next !== undefined)
                 return next;
@@ -6926,11 +6998,15 @@ var $;
                 return next;
             return null;
         }
+        suggests() {
+            return [];
+        }
         Query() {
             const obj = new this.$.$mol_search();
             obj.hint = () => this.$.$mol_locale.text('$hyoo_artist_app_Query_hint');
             obj.query = (next) => this.query_changed(next);
             obj.submit = (next) => this.imagine(next);
+            obj.suggests = () => this.suggests();
             return obj;
         }
         index(next) {
@@ -7401,6 +7477,22 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    function $mol_match_text(query, values) {
+        const tags = query.toLowerCase().trim().split(/\s+/).filter(tag => tag);
+        if (tags.length === 0)
+            return () => true;
+        return (variant) => {
+            const vals = values(variant);
+            return tags.every(tag => vals.some(val => val.toLowerCase().indexOf(tag) >= 0));
+        };
+    }
+    $.$mol_match_text = $mol_match_text;
+})($ || ($ = {}));
+//mol/match/text.ts
+;
+"use strict";
+var $;
+(function ($) {
     var $$;
     (function ($$) {
         $mol_style_define($hyoo_artist_app, {
@@ -7459,6 +7551,29 @@ var $;
                     return 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"/>';
                 return this.$.$hyoo_artist_imagine(this.prompt());
             }
+            suggests() {
+                const query = this.query_changed();
+                if (!query)
+                    return [];
+                const [prefix = query, suffix = '', postfix = ''] = /^(.*)(\b(?:by|in|with)\b|,)([\w ]*?)$/.exec(query)?.slice(1) ?? [];
+                switch (suffix) {
+                    case 'by': return this.artists()
+                        .filter($mol_match_text(postfix, a => [a]))
+                        .map(artist => `${prefix}by ${artist} artist`);
+                    case 'in': return this.art_styles()
+                        .filter($mol_match_text(postfix, s => [s]))
+                        .map(style => `${prefix}in ${style} style`);
+                    case 'with': return this.art_moods()
+                        .filter($mol_match_text(postfix, m => [m]))
+                        .map(mood => `${prefix}with ${mood} mood`);
+                    case ',': return [
+                        `${prefix}, by `,
+                        `${prefix}, in `,
+                        `${prefix}, with `,
+                    ];
+                    default: return [];
+                }
+            }
         }
         __decorate([
             $mol_mem
@@ -7484,6 +7599,9 @@ var $;
         __decorate([
             $mol_mem
         ], $hyoo_artist_app.prototype, "image", null);
+        __decorate([
+            $mol_mem
+        ], $hyoo_artist_app.prototype, "suggests", null);
         $$.$hyoo_artist_app = $hyoo_artist_app;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));

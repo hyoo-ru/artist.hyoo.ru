@@ -2051,8 +2051,12 @@ declare namespace $ {
         tools(): readonly any[];
         body(): readonly any[];
         plugins(): readonly any[];
+        artists(): readonly any[];
+        art_styles(): readonly any[];
+        art_moods(): readonly any[];
         query_changed(next?: any): string;
         imagine(next?: any): any;
+        suggests(): readonly any[];
         Query(): $$.$mol_search;
         index(next?: any): number;
         backward(next?: any): void;
@@ -2137,6 +2141,10 @@ declare namespace $ {
     function $hyoo_artist_imagine(this: $, prompt: string): string;
 }
 
+declare namespace $ {
+    function $mol_match_text<Variant>(query: string, values: (variant: Variant) => string[]): (variant: Variant) => boolean;
+}
+
 declare namespace $.$$ {
 }
 
@@ -2150,6 +2158,7 @@ declare namespace $.$$ {
         imagine(): void;
         prompt(): string;
         image(): string;
+        suggests(): string[];
     }
 }
 

@@ -7384,7 +7384,7 @@ var $;
 var $;
 (function ($) {
     function $hyoo_artist_imagine(prompt) {
-        return this.$mol_huggingface_run('jin-nin-artist', 3, prompt, 0)[0];
+        return this.$mol_huggingface_run('hyoo-imagine', 0, prompt)[0];
     }
     $.$hyoo_artist_imagine = $hyoo_artist_imagine;
 })($ || ($ = {}));
@@ -7442,6 +7442,8 @@ var $;
                 this.$.$mol_state_arg.go({ '': this.query_changed() });
             }
             prompt() {
+                if (!this.index())
+                    return this.query_en();
                 return `${this.query_en()}, ${this.index()}`;
             }
             image() {

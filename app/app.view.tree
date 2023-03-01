@@ -10,10 +10,13 @@ $hyoo_artist_app $mol_page
 			value? <=> index? 0
 			backward? => backward?
 			forward? => forward?
+		<= Lights $mol_lights_toggle
+		<= Source $mol_link_source uri \https://github.com/hyoo-ru/artist.hyoo.ru
 	body /
 		<= Image $mol_image
 			uri <= image \
 	plugins /
+		<= Theme $mol_theme_auto
 		<= Hotkey $mol_hotkey key *
 			pageUp? <=> backward?
 			pageDown? <=> forward?

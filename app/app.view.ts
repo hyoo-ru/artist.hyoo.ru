@@ -2,6 +2,12 @@ namespace $.$$ {
 	export class $hyoo_artist_app extends $.$hyoo_artist_app {
 		
 		@ $mol_mem
+		title() {
+			if( !this.query() ) return super.title()
+			return `${ this.query() } / ${ super.title() }`
+		}
+		
+		@ $mol_mem
 		query( next?: string ) {
 			return this.$.$mol_state_arg.value( '', next ) ?? ''
 		}

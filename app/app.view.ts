@@ -44,5 +44,40 @@ namespace $.$$ {
 			return this.$.$hyoo_artist_imagine( this.prompt() )
 		}
 		
+		@ $mol_mem
+		suggests() {
+			
+			const query = this.query_changed()
+			if( !query ) return []
+			
+			const [ prefix = query, suffix = '', postfix = '' ]
+				= /^(.*)(\b(?:by|in|with)\b|,)([\w ]*?)$/.exec( query )?.slice(1) ?? []
+			
+			switch( suffix ) {
+				
+				case 'by': return this.artists()
+				.filter( $mol_match_text( postfix, a => [a] ) )
+				.map( artist => `${prefix}by ${artist} artist` )
+				
+				case 'in': return this.art_styles()
+					.filter( $mol_match_text( postfix, s => [s] ) )
+					.map( style => `${prefix}in ${style} style` )
+				
+				case 'with': return this.art_moods()
+					.filter( $mol_match_text( postfix, m => [m] ) )
+					.map( mood => `${prefix}with ${mood} mood` )
+				
+				case ',': return [
+					`${prefix}, by `,
+					`${prefix}, in `,
+					`${prefix}, with `,
+				]
+				
+				default: return []
+				
+			}
+			
+		}
+		
 	}
 }

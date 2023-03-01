@@ -1,4 +1,4 @@
-name: $hyoo_artist
+name: $hyoo_artist_app
 
 on:
   workflow_dispatch:
@@ -18,9 +18,10 @@ jobs:
       with:
         token: ${{ secrets.GH_PAT }}
         package: 'hyoo/artist'
+		modules: 'app'
     
     - uses: alex-page/blazing-fast-gh-pages-deploy@v1.1.0
       if: github.ref == 'refs/heads/master'
       with:
         repo-token: ${{ secrets.GH_PAT }}
-        site-directory: 'hyoo/artist/-'
+        site-directory: 'hyoo/artist/app/-'

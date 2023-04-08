@@ -7785,6 +7785,7 @@ var $;
             },
             Image: {
                 objectFit: 'contain',
+                width: 'auto',
                 flex: {
                     grow: 1,
                 },

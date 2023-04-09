@@ -19,19 +19,18 @@ namespace $.$$ {
 		
 		@ $mol_mem
 		query_changed( next = this.query() ) {
+			if( next === '' ) this.query('')
 			return next
 		}
 		
 		@ $mol_action
 		imagine() {
 			this.$.$mol_state_arg.go({ '': this.query_changed() })
-			this.indexes([])
 		}
 		
 		@ $mol_mem_key
-		image( index: number ) {
-			$mol_wire_solid()
-			return this.$.$hyoo_artist_imagine( this.query_en() )
+		image( uri: string ) {
+			return uri
 		}
 
 		@ $mol_mem
@@ -39,10 +38,16 @@ namespace $.$$ {
 			const base = super.image_size()
 			return Math.min( base, this.view_rect()?.width ?? base )
 		}
-
-		images_more( from: number | null ) {
+		
+		images_more( from: string | null ) {
 			if( !this.query() ) return []
-			return [ ( from ?? 0 ) + 1 ]
+			return [ this.$.$hyoo_artist_imagine( this.query_en() ) ]
+		}
+		
+		@ $mol_mem
+		indexes( next?: number[] ) {
+			this.query()
+			return next ?? []
 		}
 		
 		@ $mol_mem

@@ -11,7 +11,7 @@ $hyoo_artist_app $mol_page
 		<= Source $mol_link_source uri \https://github.com/hyoo-ru/artist.hyoo.ru
 	body /
 		<= Images $mol_infinite
-			row_ids? <=> indexes? /
+			row_ids? <=> images? /
 			after* <= images_more* /
 			Row* <= Image* $mol_image
 				minimal_width <= image_size

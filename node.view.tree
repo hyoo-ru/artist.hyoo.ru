@@ -303,11 +303,11 @@ $mol_infinite $mol_list
 	Before* $mol_view
 		minimal_width 0
 		minimal_height 0
-		auto <= before_load* null
+		sub / <= before_load* null
 	After* $mol_view
 		minimal_width 0
 		minimal_height 0
-		auto <= after_load* null
+		sub / <= after_load* null
 
 $hyoo_artist_app $mol_page
 	title @ \Artificial Artist
@@ -322,7 +322,7 @@ $hyoo_artist_app $mol_page
 		<= Source $mol_link_source uri \https://github.com/hyoo-ru/artist.hyoo.ru
 	body /
 		<= Images $mol_infinite
-			row_ids? <=> indexes? /
+			row_ids? <=> images? /
 			after* <= images_more* /
 			Row* <= Image* $mol_image
 				minimal_width <= image_size

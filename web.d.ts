@@ -2025,7 +2025,7 @@ declare namespace $ {
         suggests(): readonly any[];
         Query(): $$.$mol_search;
         Source(): $mol_link_source;
-        indexes(next?: any): readonly any[];
+        images(next?: any): readonly any[];
         images_more(id: any): readonly any[];
         image(id: any): string;
         Image(id: any): $$.$mol_image;
@@ -2055,9 +2055,10 @@ declare namespace $.$$ {
         query_en(): string;
         query_changed(next?: string): string;
         imagine(): void;
-        image(index: number): string;
+        image(uri: string): string;
         image_size(): number;
-        images_more(from: number | null): number[];
+        images_more(from: string | null): string[];
+        indexes(next?: number[]): number[];
         suggests(): string[];
     }
 }

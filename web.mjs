@@ -6429,14 +6429,18 @@ var $;
             const obj = new this.$.$mol_view();
             obj.minimal_width = () => 0;
             obj.minimal_height = () => 0;
-            obj.auto = () => this.before_load(id);
+            obj.sub = () => [
+                this.before_load(id)
+            ];
             return obj;
         }
         After(id) {
             const obj = new this.$.$mol_view();
             obj.minimal_width = () => 0;
             obj.minimal_height = () => 0;
-            obj.auto = () => this.after_load(id);
+            obj.sub = () => [
+                this.after_load(id)
+            ];
             return obj;
         }
         before_load(id) {
@@ -6520,7 +6524,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("mol/infinite/infinite.view.css", "[mol_infinite_before],\n[mol_infinite_after] {\n\toverflow-anchor: none;\n}\n\n[mol_infinite_after][mol_view_error=\"Promise\"] {\n\theight: 100vh;\n}\n");
+    $mol_style_attach("mol/infinite/infinite.view.css", "[mol_infinite_before],\n[mol_infinite_after] {\n\toverflow-anchor: none;\n\tborder-radius: var(--mol_gap_round);\n}\n\n[mol_infinite_after]:where([mol_view_error=\"Promise\"]) {\n\theight: 100vh;\n}\n");
 })($ || ($ = {}));
 //mol/infinite/-css/infinite.view.css.ts
 ;
@@ -6650,7 +6654,7 @@ var $;
             obj.uri = () => "https://github.com/hyoo-ru/artist.hyoo.ru";
             return obj;
         }
-        indexes(next) {
+        images(next) {
             if (next !== undefined)
                 return next;
             return [];
@@ -6670,7 +6674,7 @@ var $;
         }
         Images() {
             const obj = new this.$.$mol_infinite();
-            obj.row_ids = (next) => this.indexes(next);
+            obj.row_ids = (next) => this.images(next);
             obj.after = (id) => this.images_more(id);
             obj.Row = (id) => this.Image(id);
             return obj;
@@ -6693,7 +6697,7 @@ var $;
     ], $hyoo_artist_app.prototype, "Source", null);
     __decorate([
         $mol_mem
-    ], $hyoo_artist_app.prototype, "indexes", null);
+    ], $hyoo_artist_app.prototype, "images", null);
     __decorate([
         $mol_mem_key
     ], $hyoo_artist_app.prototype, "Image", null);
@@ -6816,15 +6820,15 @@ var $;
                 return this.$.$hyoo_lingua_translate('en', this.query());
             }
             query_changed(next = this.query()) {
+                if (next === '')
+                    this.query('');
                 return next;
             }
             imagine() {
                 this.$.$mol_state_arg.go({ '': this.query_changed() });
-                this.indexes([]);
             }
-            image(index) {
-                $mol_wire_solid();
-                return this.$.$hyoo_artist_imagine(this.query_en());
+            image(uri) {
+                return uri;
             }
             image_size() {
                 const base = super.image_size();
@@ -6833,7 +6837,11 @@ var $;
             images_more(from) {
                 if (!this.query())
                     return [];
-                return [(from ?? 0) + 1];
+                return [this.$.$hyoo_artist_imagine(this.query_en())];
+            }
+            indexes(next) {
+                this.query();
+                return next ?? [];
             }
             suggests() {
                 const query = this.query_changed();
@@ -6882,6 +6890,9 @@ var $;
         ], $hyoo_artist_app.prototype, "image_size", null);
         __decorate([
             $mol_mem
+        ], $hyoo_artist_app.prototype, "indexes", null);
+        __decorate([
+            $mol_mem
         ], $hyoo_artist_app.prototype, "suggests", null);
         $$.$hyoo_artist_app = $hyoo_artist_app;
     })($$ = $.$$ || ($.$$ = {}));
@@ -6903,8 +6914,20 @@ var $;
             Body: {
                 padding: 0,
             },
-            Image: {
+            Images: {
+                gap: $mol_gap.block,
+                After: {
+                    margin: 'auto',
+                    width: px(768),
+                    height: 'auto',
+                    aspectRatio: '1',
+                },
+            },
+            Image_link: {
                 margin: 'auto',
+                padding: 0,
+            },
+            Image: {
                 width: px(768),
                 aspectRatio: '1',
             },

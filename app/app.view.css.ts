@@ -1,4 +1,6 @@
 namespace $.$$ {
+
+	const { px } = $mol_style_unit
 	
 	$mol_style_define( $hyoo_artist_app, {
 		
@@ -11,15 +13,13 @@ namespace $.$$ {
 		Body: {
 			padding: 0,
 		},
-		
+
 		Image: {
-			objectFit: 'contain',
-			width: 'auto',
-			flex: {
-				grow: 1,
-			},
+			margin: 'auto',
+			width: px(768),
+			aspectRatio: '1',
 		},
-		
+
 	} )
 	
 }

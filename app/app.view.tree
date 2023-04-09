@@ -1,26 +1,22 @@
 $hyoo_artist_app $mol_page
 	title @ \Artificial Artist
 	query? \
+	image_size 768
 	Title <= Query $mol_search
 		hint @ \a kitten has cauched the dragon
 		query? <=> query_changed? \
 		submit? <=> imagine? null
 		suggests <= suggests /
 	tools /
-		<= Index $mol_paginator
-			value? <=> index? 0
-			backward? => backward?
-			forward? => forward?
-		<= Lights $mol_lights_toggle
 		<= Source $mol_link_source uri \https://github.com/hyoo-ru/artist.hyoo.ru
 	body /
-		<= Image $mol_image
-			uri <= image \
-	plugins /
-		<= Theme $mol_theme_auto
-		<= Hotkey $mol_hotkey key *
-			pageUp? <=> backward?
-			pageDown? <=> forward?
+		<= Images $mol_infinite
+			row_ids? <=> indexes? /
+			after* <= images_more* /
+			Row* <= Image* $mol_image
+				minimal_width <= image_size
+				minimal_height <= image_size
+				uri <= image* \
 	artists /
 		\Yayoi Kusama
 		\Pablo Picasso

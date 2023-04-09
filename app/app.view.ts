@@ -22,26 +22,27 @@ namespace $.$$ {
 			return next
 		}
 		
-		@ $mol_mem
-		index( next?: number ) {
-			return Number( this.$.$mol_state_arg.value( 'at', next?.valueOf && String( next ) ) ?? 0 )
-		}
-		
 		@ $mol_action
 		imagine() {
 			this.$.$mol_state_arg.go({ '': this.query_changed() })
+			this.indexes([])
 		}
 		
-		@ $mol_mem
-		prompt() {
-			if( !this.index() ) return this.query_en()
-			return `${ this.query_en() }, ${ this.index() }`
+		@ $mol_mem_key
+		image( index: number ) {
+			$mol_wire_solid()
+			return this.$.$hyoo_artist_imagine( this.query_en() )
 		}
-		
+
 		@ $mol_mem
-		image() {
-			if( !this.query() ) return 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"/>'
-			return this.$.$hyoo_artist_imagine( this.prompt() )
+		image_size() {
+			const base = super.image_size()
+			return Math.min( base, this.view_rect()?.width ?? base )
+		}
+
+		images_more( from: number | null ) {
+			if( !this.query() ) return []
+			return [ ( from ?? 0 ) + 1 ]
 		}
 		
 		@ $mol_mem
@@ -56,8 +57,8 @@ namespace $.$$ {
 			switch( suffix ) {
 				
 				case 'by': return this.artists()
-				.filter( $mol_match_text( postfix, a => [a] ) )
-				.map( artist => `${prefix}by ${artist} artist` )
+					.filter( $mol_match_text( postfix, a => [a] ) )
+					.map( artist => `${prefix}by ${artist} artist` )
 				
 				case 'in': return this.art_styles()
 					.filter( $mol_match_text( postfix, s => [s] ) )

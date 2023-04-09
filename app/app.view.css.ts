@@ -1,6 +1,7 @@
 namespace $.$$ {
 
-	const { px } = $mol_style_unit
+	const { px, rem } = $mol_style_unit
+	const { hsla } = $mol_style_func
 	
 	$mol_style_define( $hyoo_artist_app, {
 		
@@ -30,6 +31,24 @@ namespace $.$$ {
 			margin: 'auto',
 			width: px(768),
 			aspectRatio: '1',
+			box: {
+				shadow: [
+					{
+						x: 0,
+						y: 0,
+						blur: px(1),
+						spread: 0,
+						color: hsla( 0, 0, 50, .5 ),
+					},
+					{
+						x: 0,
+						y: 0,
+						blur: rem(.5),
+						spread: 0,
+						color: hsla( 0, 0, 0, .25 ),
+					},
+				],
+			},
 		},
 
 	} )

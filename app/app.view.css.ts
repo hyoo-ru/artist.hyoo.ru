@@ -26,12 +26,8 @@ namespace $.$$ {
 			
 		},
 
-		Image_link: {
-			margin: 'auto',
-			padding: 0,
-		},
-
 		Image: {
+			margin: 'auto',
 			width: px(768),
 			aspectRatio: '1',
 		},

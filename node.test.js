@@ -7393,14 +7393,14 @@ var $;
                 const base = super.image_size();
                 return Math.min(base, this.view_rect()?.width ?? base);
             }
+            images(next) {
+                this.query();
+                return next ?? [];
+            }
             images_more(from) {
                 if (!this.query())
                     return [];
                 return [this.$.$hyoo_artist_imagine(this.query_en())];
-            }
-            indexes(next) {
-                this.query();
-                return next ?? [];
             }
             suggests() {
                 const query = this.query_changed();
@@ -7449,7 +7449,7 @@ var $;
         ], $hyoo_artist_app.prototype, "image_size", null);
         __decorate([
             $mol_mem
-        ], $hyoo_artist_app.prototype, "indexes", null);
+        ], $hyoo_artist_app.prototype, "images", null);
         __decorate([
             $mol_mem
         ], $hyoo_artist_app.prototype, "suggests", null);

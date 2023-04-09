@@ -2183,8 +2183,8 @@ declare namespace $.$$ {
         imagine(): void;
         image(uri: string): string;
         image_size(): number;
+        images(next?: number[]): number[];
         images_more(from: string | null): string[];
-        indexes(next?: number[]): number[];
         suggests(): string[];
     }
 }

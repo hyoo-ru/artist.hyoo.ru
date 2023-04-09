@@ -252,48 +252,6 @@ $mol_search $mol_pop
 				haystack <= suggest_label* \
 				needle <= query?val \
 
-$mol_bar $mol_view
-
-$mol_icon_chevron $mol_icon path \M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z
-
-$mol_icon_chevron_left $mol_icon path \M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z
-
-$mol_icon_chevron_right $mol_icon path \M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z
-
-$mol_paginator $mol_bar
-	sub /
-		<= Backward $mol_button_minor
-			hint <= backward_hint @ \Backward
-			click?event <=> backward?event null
-			sub / <= Backward_icon $mol_icon_chevron_left
-		<= Value $mol_view sub / <= value?val 0
-		<= Forward $mol_button_minor
-			hint <= forward_hint @ \Forward
-			click?event <=> forward?event null
-			sub / <= Forward_icon $mol_icon_chevron_right
-
-$mol_check $mol_button_minor
-	attr *
-		^
-		mol_check_checked <= checked? false
-		aria-checked <= aria_checked \false
-		role <= aria_role \checkbox
-	sub /$mol_view_content
-		<= Icon null
-		<= label /
-			<= Title $mol_view
-				sub /
-					<= title \
-
-$mol_check_icon $mol_check
-
-$mol_icon_brightness_6 $mol_icon path \M12,18V6C15.31,6 18,8.69 18,12C18,15.31 15.31,18 12,18M20,15.31L23.31,12L20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31Z
-
-$mol_lights_toggle $mol_check_icon
-	Icon <= Lights_icon $mol_icon_brightness_6
-	hint @ \Toggle lights
-	checked?val <=> lights?val false
-
 $mol_link $mol_view
 	uri \
 	dom_name \a
@@ -336,32 +294,40 @@ $mol_image $mol_view
 	minimal_width 16
 	minimal_height 16
 
-$mol_theme_auto $mol_plugin
-	attr * mol_theme <= theme \
+$mol_infinite $mol_list
+	before* /
+	after* /
+	row_ids? /
+	render_over 1
+	Row* $mol_view
+	Before* $mol_view
+		minimal_width 0
+		minimal_height 0
+		auto <= before_load* null
+	After* $mol_view
+		minimal_width 0
+		minimal_height 0
+		auto <= after_load* null
 
 $hyoo_artist_app $mol_page
 	title @ \Artificial Artist
 	query? \
+	image_size 768
 	Title <= Query $mol_search
 		hint @ \a kitten has cauched the dragon
 		query? <=> query_changed? \
 		submit? <=> imagine? null
 		suggests <= suggests /
 	tools /
-		<= Index $mol_paginator
-			value? <=> index? 0
-			backward? => backward?
-			forward? => forward?
-		<= Lights $mol_lights_toggle
 		<= Source $mol_link_source uri \https://github.com/hyoo-ru/artist.hyoo.ru
 	body /
-		<= Image $mol_image
-			uri <= image \
-	plugins /
-		<= Theme $mol_theme_auto
-		<= Hotkey $mol_hotkey key *
-			pageUp? <=> backward?
-			pageDown? <=> forward?
+		<= Images $mol_infinite
+			row_ids? <=> indexes? /
+			after* <= images_more* /
+			Row* <= Image* $mol_image
+				minimal_width <= image_size
+				minimal_height <= image_size
+				uri <= image* \
 	artists /
 		\Yayoi Kusama
 		\Pablo Picasso

@@ -1047,8 +1047,8 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    function $mol_huggingface_run(this: $, space: string, method: string | number, ...data: readonly any[]): readonly string[];
-    function $mol_huggingface_async(space: string, method: number, ...data: readonly any[]): Promise<[string]> & {
+    function $mol_huggingface_run(this: $, space: string, method: string | number, ...data: readonly any[]): any[] | readonly string[];
+    function $mol_huggingface_async(space: string, method: number, ...data: readonly any[]): Promise<any[]> & {
         destructor: () => void;
     };
 }
@@ -1066,7 +1066,7 @@ declare namespace $ {
         static lang(next?: string): string;
         static source(lang: string): any;
         static texts(lang: string, next?: $mol_locale_dict): $mol_locale_dict;
-        static text(key: string): {} | null;
+        static text(key: string): string;
         static warn(key: string): null;
     }
 }
@@ -1813,7 +1813,7 @@ declare namespace $ {
         nav_focused(component?: any): any;
         Nav(): $$.$mol_nav;
         suggests_showed(val?: any): boolean;
-        hint(): {} | null;
+        hint(): string;
         submit(event?: any): any;
         enabled(): boolean;
         keyboard(): string;
@@ -1850,55 +1850,30 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    class $mol_bar extends $mol_view {
+    class $mol_link extends $mol_view {
+        uri(): string;
+        dom_name(): string;
+        attr(): {
+            href: string;
+            title: string;
+            target: string;
+            download: string;
+            mol_link_current: boolean;
+        };
+        sub(): readonly $mol_view_content[];
+        arg(): {};
+        event(): {
+            click: (event?: any) => any;
+        };
+        uri_toggle(): string;
+        hint(): string;
+        hint_safe(): string;
+        target(): string;
+        file_name(): string;
+        current(): boolean;
+        event_click(event?: any): any;
+        click(event?: any): any;
     }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-    class $mol_icon_chevron extends $mol_icon {
-        path(): string;
-    }
-}
-
-declare namespace $ {
-    class $mol_icon_chevron_left extends $mol_icon {
-        path(): string;
-    }
-}
-
-declare namespace $ {
-    class $mol_icon_chevron_right extends $mol_icon {
-        path(): string;
-    }
-}
-
-declare namespace $ {
-    class $mol_paginator extends $mol_bar {
-        sub(): readonly any[];
-        backward_hint(): {} | null;
-        backward(event?: any): any;
-        Backward_icon(): $mol_icon_chevron_left;
-        Backward(): $mol_button_minor;
-        value(val?: any): number;
-        Value(): $mol_view;
-        forward_hint(): {} | null;
-        forward(event?: any): any;
-        Forward_icon(): $mol_icon_chevron_right;
-        Forward(): $mol_button_minor;
-    }
-}
-
-declare namespace $.$$ {
-    class $mol_paginator extends $.$mol_paginator {
-        backward(event: Event): void;
-        forward(event: Event): void;
-    }
-}
-
-declare namespace $ {
 }
 
 declare namespace $ {
@@ -1937,100 +1912,6 @@ declare namespace $ {
     }
 }
 
-declare namespace $ {
-    function $mol_lights(this: $, next?: boolean): boolean;
-}
-
-declare namespace $ {
-    class $mol_check extends $mol_button_minor {
-        attr(): {
-            mol_check_checked: boolean;
-            "aria-checked": string;
-            role: string;
-            disabled: boolean;
-            tabindex: number;
-            title: string;
-        };
-        sub(): readonly $mol_view_content[];
-        checked(next?: any): boolean;
-        aria_checked(): string;
-        aria_role(): string;
-        Icon(): any;
-        title(): string;
-        Title(): $mol_view;
-        label(): readonly any[];
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $.$$ {
-    class $mol_check extends $.$mol_check {
-        click(next?: Event): void;
-        sub(): readonly $mol_view_content[];
-        label(): readonly any[];
-        aria_checked(): string;
-    }
-}
-
-declare namespace $ {
-    class $mol_check_icon extends $mol_check {
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-    class $mol_icon_brightness_6 extends $mol_icon {
-        path(): string;
-    }
-}
-
-declare namespace $ {
-    class $mol_lights_toggle extends $mol_check_icon {
-        Icon(): $mol_icon_brightness_6;
-        hint(): {} | null;
-        checked(val?: any): boolean;
-        Lights_icon(): $mol_icon_brightness_6;
-        lights(val?: any): boolean;
-    }
-}
-
-declare namespace $.$$ {
-    class $mol_lights_toggle extends $.$mol_lights_toggle {
-        lights(next?: boolean): boolean;
-    }
-}
-
-declare namespace $ {
-    class $mol_link extends $mol_view {
-        uri(): string;
-        dom_name(): string;
-        attr(): {
-            href: string;
-            title: string;
-            target: string;
-            download: string;
-            mol_link_current: boolean;
-        };
-        sub(): readonly $mol_view_content[];
-        arg(): {};
-        event(): {
-            click: (event?: any) => any;
-        };
-        uri_toggle(): string;
-        hint(): string;
-        hint_safe(): string;
-        target(): string;
-        file_name(): string;
-        current(): boolean;
-        event_click(event?: any): any;
-        click(event?: any): any;
-    }
-}
-
 declare namespace $.$$ {
     class $mol_link extends $.$mol_link {
         uri_toggle(): string;
@@ -2057,7 +1938,7 @@ declare namespace $ {
 
 declare namespace $ {
     class $mol_link_source extends $mol_link {
-        hint(): {} | null;
+        hint(): string;
         sub(): readonly any[];
         Icon(): $mol_icon_github_circle;
     }
@@ -2104,28 +1985,38 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    class $mol_theme_auto extends $mol_plugin {
-        attr(): {
-            mol_theme: string;
-        };
-        theme(): string;
+    class $mol_infinite extends $mol_list {
+        before(id: any): readonly any[];
+        after(id: any): readonly any[];
+        row_ids(next?: any): readonly any[];
+        render_over(): number;
+        Row(id: any): $mol_view;
+        Before(id: any): $mol_view;
+        After(id: any): $mol_view;
+        before_load(id: any): any;
+        after_load(id: any): any;
     }
 }
 
 declare namespace $.$$ {
-    class $mol_theme_auto extends $.$mol_theme_auto {
-        theme(): "$mol_theme_light" | "$mol_theme_dark";
+    class $mol_infinite extends $.$mol_infinite {
+        before_load(anchor: any): void;
+        after_load(anchor: any): void;
+        rows(): $mol_view[];
     }
 }
 
 declare namespace $ {
+}
+
+declare namespace $ {
     class $hyoo_artist_app extends $mol_page {
-        title(): {} | null;
+        title(): string;
         query(next?: any): string;
+        image_size(): number;
         Title(): $$.$mol_search;
         tools(): readonly any[];
         body(): readonly any[];
-        plugins(): readonly any[];
         artists(): readonly any[];
         art_styles(): readonly any[];
         art_moods(): readonly any[];
@@ -2133,21 +2024,17 @@ declare namespace $ {
         imagine(next?: any): any;
         suggests(): readonly any[];
         Query(): $$.$mol_search;
-        index(next?: any): number;
-        backward(next?: any): void;
-        forward(next?: any): void;
-        Index(): $$.$mol_paginator;
-        Lights(): $$.$mol_lights_toggle;
         Source(): $mol_link_source;
-        image(): string;
-        Image(): $$.$mol_image;
-        Theme(): $$.$mol_theme_auto;
-        Hotkey(): $$.$mol_hotkey;
+        indexes(next?: any): readonly any[];
+        images_more(id: any): readonly any[];
+        image(id: any): string;
+        Image(id: any): $$.$mol_image;
+        Images(): $$.$mol_infinite;
     }
 }
 
 declare namespace $ {
-    function $hyoo_artist_imagine(this: $, prompt: string): string;
+    function $hyoo_artist_imagine(this: $, prompt: string, forbid?: string): string;
 }
 
 declare namespace $ {
@@ -2163,14 +2050,14 @@ declare namespace $ {
 
 declare namespace $.$$ {
     class $hyoo_artist_app extends $.$hyoo_artist_app {
-        title(): {} | null;
+        title(): string;
         query(next?: string): string;
         query_en(): string;
         query_changed(next?: string): string;
-        index(next?: number): number;
         imagine(): void;
-        prompt(): string;
-        image(): string;
+        image(index: number): string;
+        image_size(): number;
+        images_more(from: number | null): number[];
         suggests(): string[];
     }
 }

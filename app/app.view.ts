@@ -39,15 +39,15 @@ namespace $.$$ {
 			return Math.min( base, this.view_rect()?.width ?? base )
 		}
 		
+		@ $mol_mem
+		images( next?: number[] ) {
+			this.query()
+			return next ?? []
+		}
+		
 		images_more( from: string | null ) {
 			if( !this.query() ) return []
 			return [ this.$.$hyoo_artist_imagine( this.query_en() ) ]
-		}
-		
-		@ $mol_mem
-		indexes( next?: number[] ) {
-			this.query()
-			return next ?? []
 		}
 		
 		@ $mol_mem

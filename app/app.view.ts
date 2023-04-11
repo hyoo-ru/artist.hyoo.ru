@@ -15,24 +15,19 @@ namespace $.$$ {
 		@ $mol_mem
 		tokens() {
 			
-			const next = {
-				prefer: [] as string[],
-				forbid: [] as string[],
+			const {
+				prefer = [],
+				forbid = [],
+			} = $mol_array_groups(
+				this.query().split( /\s+/g ).filter( v => v ),
+				token => token.startsWith( '-' ) ? 'forbid' : 'prefer'
+			)
+			
+			return {
+				prefer,
+				forbid: forbid.map( token => token.slice(1) )
 			}
 			
-			const all = this.query().split( /\s+/g ).filter( v => v )
-			
-			for( const token of all ) {
-				
-				if( token.startsWith( '-' ) ) {
-					next.forbid.push( token.slice( 1 ) )
-				} else {
-					next.prefer.push( token )
-				}
-				
-			}
-			
-			return next as $mol_type_immutable_deep< typeof next >
 		}
 		
 		@ $mol_mem

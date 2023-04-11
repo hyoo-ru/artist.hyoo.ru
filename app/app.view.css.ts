@@ -1,18 +1,12 @@
 namespace $.$$ {
 
-	const { px, rem } = $mol_style_unit
+	const { px, rem, per } = $mol_style_unit
 	const { hsla } = $mol_style_func
 	
 	$mol_style_define( $hyoo_artist_app, {
 		
-		Tools: {
-			flex: {
-				grow: 0,
-			},
-		},
-		
 		Body: {
-			padding: 0,
+			padding: [ 0, $mol_gap.block ],
 		},
 		
 		Images: {
@@ -21,8 +15,9 @@ namespace $.$$ {
 			After: {
 				margin: 'auto',
 				width: px(768),
+				maxWidth: per(100),
 				height: 'auto',
-				aspectRatio: '1',
+				aspectRatio: 1,
 			},
 			
 		},
@@ -30,7 +25,7 @@ namespace $.$$ {
 		Image: {
 			margin: 'auto',
 			width: px(768),
-			aspectRatio: '1',
+			aspectRatio: 1,
 			box: {
 				shadow: [
 					{
@@ -38,7 +33,7 @@ namespace $.$$ {
 						y: 0,
 						blur: px(1),
 						spread: 0,
-						color: hsla( 0, 0, 50, .5 ),
+						color: hsla( 0, 0, 100, .5 ),
 					},
 					{
 						x: 0,

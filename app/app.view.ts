@@ -14,6 +14,7 @@ namespace $.$$ {
 		
 		@ $mol_mem
 		query_en() {
+			if( !this.query() ) return ''
 			return this.$.$hyoo_lingua_translate( 'en', this.query() )
 		}
 		
@@ -25,7 +26,7 @@ namespace $.$$ {
 		
 		@ $mol_action
 		imagine() {
-			this.$.$mol_state_arg.go({ '': this.query_changed() })
+			this.query( this.query_changed() )
 		}
 		
 		@ $mol_mem_key
@@ -34,19 +35,14 @@ namespace $.$$ {
 		}
 
 		@ $mol_mem
-		image_size() {
-			const base = super.image_size()
-			return Math.min( base, this.view_rect()?.width ?? base )
-		}
-		
-		@ $mol_mem
 		images( next?: number[] ) {
 			this.query()
 			return next ?? []
 		}
 		
+		@ $mol_action
 		images_more( from: string | null ) {
-			if( !this.query() ) return []
+			if( !this.query_en() ) return []
 			return [ this.$.$hyoo_artist_imagine( this.query_en() ) ]
 		}
 		

@@ -7436,9 +7436,6 @@ var $;
             $mol_mem
         ], $hyoo_artist_app.prototype, "images", null);
         __decorate([
-            $mol_action
-        ], $hyoo_artist_app.prototype, "images_more", null);
-        __decorate([
             $mol_mem
         ], $hyoo_artist_app.prototype, "suggests", null);
         $$.$hyoo_artist_app = $hyoo_artist_app;

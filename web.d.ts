@@ -749,6 +749,7 @@ declare namespace $ {
         };
         zIndex: number | Common;
         opacity: number | Common;
+        aspectRatio: number | Common;
     }
     export {};
 }
@@ -2012,10 +2013,7 @@ declare namespace $ {
 declare namespace $ {
     class $hyoo_artist_app extends $mol_page {
         title(): string;
-        query(next?: any): string;
-        image_size(): number;
-        Title(): $$.$mol_search;
-        tools(): readonly any[];
+        head(): readonly any[];
         body(): readonly any[];
         artists(): readonly any[];
         art_styles(): readonly any[];
@@ -2057,7 +2055,6 @@ declare namespace $.$$ {
         query_changed(next?: string): string;
         imagine(): void;
         image(uri: string): string;
-        image_size(): number;
         images(next?: number[]): number[];
         images_more(from: string | null): string[];
         suggests(): string[];

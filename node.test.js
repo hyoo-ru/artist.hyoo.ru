@@ -7140,19 +7140,9 @@ var $;
         title() {
             return this.title_default();
         }
-        query(next) {
-            if (next !== undefined)
-                return next;
-            return "";
-        }
-        image_size() {
-            return 768;
-        }
-        Title() {
-            return this.Query();
-        }
-        tools() {
+        head() {
             return [
+                this.Query(),
                 this.Source()
             ];
         }
@@ -7275,8 +7265,8 @@ var $;
         }
         Image(id) {
             const obj = new this.$.$mol_image();
-            obj.minimal_width = () => this.image_size();
-            obj.minimal_height = () => this.image_size();
+            obj.minimal_width = () => 256;
+            obj.minimal_height = () => 256;
             obj.uri = () => this.image(id);
             return obj;
         }
@@ -7288,9 +7278,6 @@ var $;
             return obj;
         }
     }
-    __decorate([
-        $mol_mem
-    ], $hyoo_artist_app.prototype, "query", null);
     __decorate([
         $mol_mem
     ], $hyoo_artist_app.prototype, "query_changed", null);
@@ -7379,6 +7366,8 @@ var $;
                 return this.$.$mol_state_arg.value('', next) ?? '';
             }
             query_en() {
+                if (!this.query())
+                    return '';
                 return this.$.$hyoo_lingua_translate('en', this.query());
             }
             query_changed(next = this.query()) {
@@ -7387,21 +7376,17 @@ var $;
                 return next;
             }
             imagine() {
-                this.$.$mol_state_arg.go({ '': this.query_changed() });
+                this.query(this.query_changed());
             }
             image(uri) {
                 return uri;
-            }
-            image_size() {
-                const base = super.image_size();
-                return Math.min(base, this.view_rect()?.width ?? base);
             }
             images(next) {
                 this.query();
                 return next ?? [];
             }
             images_more(from) {
-                if (!this.query())
+                if (!this.query_en())
                     return [];
                 return [this.$.$hyoo_artist_imagine(this.query_en())];
             }
@@ -7449,10 +7434,10 @@ var $;
         ], $hyoo_artist_app.prototype, "image", null);
         __decorate([
             $mol_mem
-        ], $hyoo_artist_app.prototype, "image_size", null);
-        __decorate([
-            $mol_mem
         ], $hyoo_artist_app.prototype, "images", null);
+        __decorate([
+            $mol_action
+        ], $hyoo_artist_app.prototype, "images_more", null);
         __decorate([
             $mol_mem
         ], $hyoo_artist_app.prototype, "suggests", null);
@@ -7466,30 +7451,26 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        const { px, rem } = $mol_style_unit;
+        const { px, rem, per } = $mol_style_unit;
         const { hsla } = $mol_style_func;
         $mol_style_define($hyoo_artist_app, {
-            Tools: {
-                flex: {
-                    grow: 0,
-                },
-            },
             Body: {
-                padding: 0,
+                padding: [0, $mol_gap.block],
             },
             Images: {
                 gap: $mol_gap.block,
                 After: {
                     margin: 'auto',
                     width: px(768),
+                    maxWidth: per(100),
                     height: 'auto',
-                    aspectRatio: '1',
+                    aspectRatio: 1,
                 },
             },
             Image: {
                 margin: 'auto',
                 width: px(768),
-                aspectRatio: '1',
+                aspectRatio: 1,
                 box: {
                     shadow: [
                         {
@@ -7497,7 +7478,7 @@ var $;
                             y: 0,
                             blur: px(1),
                             spread: 0,
-                            color: hsla(0, 0, 50, .5),
+                            color: hsla(0, 0, 100, .5),
                         },
                         {
                             x: 0,

@@ -311,22 +311,21 @@ $mol_infinite $mol_list
 
 $hyoo_artist_app $mol_page
 	title <= title_default @ \Artificial Artist
-	query? \
-	image_size 768
-	Title <= Query $mol_search
-		hint <= title_default
-		query? <=> query_changed? \
-		submit? <=> imagine? null
-		suggests <= suggests /
-	tools /
-		<= Source $mol_link_source uri \https://github.com/hyoo-ru/artist.hyoo.ru
+	head /
+		<= Query $mol_search
+			hint <= title_default
+			query? <=> query_changed? \
+			submit? <=> imagine? null
+			suggests <= suggests /
+		<= Source $mol_link_source
+			uri \https://github.com/hyoo-ru/artist.hyoo.ru
 	body /
 		<= Images $mol_infinite
 			row_ids? <=> images? /
 			after* <= images_more* /
 			Row* <= Image* $mol_image
-				minimal_width <= image_size
-				minimal_height <= image_size
+				minimal_width 256
+				minimal_height 256
 				uri <= image* \
 	artists /
 		\Yayoi Kusama

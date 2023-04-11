@@ -3,8 +3,8 @@ namespace $.$$ {
 		
 		@ $mol_mem
 		title() {
-			if( !this.query() ) return super.title()
-			return `${ this.query() } / ${ super.title() }`
+			if( !this.query() ) return this.title_default()
+			return `${ this.query() } / ${ this.title_default() }`
 		}
 		
 		@ $mol_mem

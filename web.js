@@ -6868,9 +6868,6 @@ var $;
             $mol_mem
         ], $hyoo_artist_app.prototype, "query_changed", null);
         __decorate([
-            $mol_action
-        ], $hyoo_artist_app.prototype, "imagine", null);
-        __decorate([
             $mol_mem_key
         ], $hyoo_artist_app.prototype, "image", null);
         __decorate([

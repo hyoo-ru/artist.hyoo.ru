@@ -180,6 +180,8 @@
     "$mol_icon_github",
     "$mol_image",
     "$mol_infinite",
+    "$mol_array_groups",
+    "$mol_array",
     "$mol_type_immutable_deep_deep",
     "$mol_type_immutable_deep",
     "$mol_type_immutable",

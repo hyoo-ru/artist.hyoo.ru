@@ -2165,6 +2165,10 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    function $mol_array_groups<Item, Groups extends string>(all: readonly Item[], group: (item: Item) => Groups): $mol_type_immutable_deep<Record<Groups, Item[] | undefined>>;
+}
+
+declare namespace $ {
     function $hyoo_artist_imagine(this: $, prompt: string, forbid?: string): string;
 }
 
@@ -2183,14 +2187,14 @@ declare namespace $.$$ {
     class $hyoo_artist_app extends $.$hyoo_artist_app {
         title(): string;
         query(next?: string): string;
-        tokens(): $mol_type_immutable_deep<{
-            prefer: string[];
+        tokens(): {
+            prefer: readonly string[];
             forbid: string[];
-        }>;
-        propt(): $mol_type_immutable_deep<{
-            prefer: string[];
+        };
+        propt(): {
+            prefer: readonly string[];
             forbid: string[];
-        }>;
+        };
         prefer(): string;
         forbid(): string;
         query_changed(next?: string): string;

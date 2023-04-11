@@ -7309,6 +7309,21 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    function $mol_array_groups(all, group) {
+        const res = {};
+        for (const item of all) {
+            const list = (res[group(item)] ||= []);
+            list.push(item);
+        }
+        return res;
+    }
+    $.$mol_array_groups = $mol_array_groups;
+})($ || ($ = {}));
+//mol/array/groups/groups.ts
+;
+"use strict";
+var $;
+(function ($) {
     function $hyoo_artist_imagine(prompt, forbid = '') {
         const space = 'ai-forever-kandinsky2-1';
         const path = this.$mol_huggingface_run(space, 2, prompt, forbid)[0][0].name;
@@ -7369,20 +7384,11 @@ var $;
                 return this.$.$mol_state_arg.value('', next) ?? '';
             }
             tokens() {
-                const next = {
-                    prefer: [],
-                    forbid: [],
+                const { prefer = [], forbid = [], } = $mol_array_groups(this.query().split(/\s+/g).filter(v => v), token => token.startsWith('-') ? 'forbid' : 'prefer');
+                return {
+                    prefer,
+                    forbid: forbid.map(token => token.slice(1))
                 };
-                const all = this.query().split(/\s+/g).filter(v => v);
-                for (const token of all) {
-                    if (token.startsWith('-')) {
-                        next.forbid.push(token.slice(1));
-                    }
-                    else {
-                        next.prefer.push(token);
-                    }
-                }
-                return next;
             }
             propt() {
                 return this.tokens();

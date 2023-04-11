@@ -13,9 +13,45 @@ namespace $.$$ {
 		}
 		
 		@ $mol_mem
-		query_en() {
-			if( !this.query() ) return ''
-			return this.$.$hyoo_lingua_translate( 'en', this.query() )
+		tokens() {
+			
+			const next = {
+				prefer: [] as string[],
+				forbid: [] as string[],
+			}
+			
+			const all = this.query().split( /\s+/g ).filter( v => v )
+			
+			for( const token of all ) {
+				
+				if( token.startsWith( '-' ) ) {
+					next.forbid.push( token.slice( 1 ) )
+				} else {
+					next.prefer.push( token )
+				}
+				
+			}
+			
+			return next as $mol_type_immutable_deep< typeof next >
+		}
+		
+		@ $mol_mem
+		propt() {
+			return this.tokens()
+		}
+		
+		@ $mol_mem
+		prefer() {
+			const tokens = this.tokens().prefer
+			if( !tokens.length ) return ''
+			return this.$.$hyoo_lingua_translate( 'en', tokens.join( ' ' ) )
+		}
+		
+		@ $mol_mem
+		forbid() {
+			const tokens = this.tokens().forbid
+			if( !tokens.length ) return ''
+			return this.$.$hyoo_lingua_translate( 'en', tokens.join( ' ' ) )
 		}
 		
 		@ $mol_mem
@@ -40,8 +76,8 @@ namespace $.$$ {
 		}
 		
 		images_more( from: string | null ) {
-			if( !this.query_en() ) return []
-			return [ this.$.$hyoo_artist_imagine( this.query_en() ) ]
+			if( !this.prefer() ) return []
+			return [ this.$.$hyoo_artist_imagine( this.prefer(), this.forbid() ) ]
 		}
 		
 		@ $mol_mem

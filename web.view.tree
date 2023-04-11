@@ -314,7 +314,7 @@ $hyoo_artist_app $mol_page
 	query? \
 	image_size 768
 	Title <= Query $mol_search
-		hint @ \a kitten has cauched the dragon
+		hint @ \a kitten caught the dragon
 		query? <=> query_changed? \
 		submit? <=> imagine? null
 		suggests <= suggests /

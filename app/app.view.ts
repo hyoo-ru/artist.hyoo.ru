@@ -40,7 +40,6 @@ namespace $.$$ {
 			return next ?? []
 		}
 		
-		@ $mol_action
 		images_more( from: string | null ) {
 			if( !this.query_en() ) return []
 			return [ this.$.$hyoo_artist_imagine( this.query_en() ) ]

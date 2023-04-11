@@ -1,6 +1,5 @@
 {
-	"$hyoo_artist_app_Query_hint": "котёнок поймал дракона",
-	"$hyoo_artist_app_title": "Искусственный Художник",
+	"$hyoo_artist_app_title_default": "Искусственный Художник",
 	"$mol_link_source_hint": "Исходные коды",
 	"$mol_search_Clear_hint": "Очистить",
 	"$mol_search_hint": "Поиск.."

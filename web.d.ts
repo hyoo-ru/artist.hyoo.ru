@@ -2020,6 +2020,7 @@ declare namespace $ {
         artists(): readonly any[];
         art_styles(): readonly any[];
         art_moods(): readonly any[];
+        title_default(): string;
         query_changed(next?: any): string;
         imagine(next?: any): any;
         suggests(): readonly any[];

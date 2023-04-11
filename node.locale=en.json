@@ -1,6 +1,5 @@
 {
-	"$hyoo_artist_app_Query_hint": "a kitten caught the dragon",
-	"$hyoo_artist_app_title": "Artificial Artist",
+	"$hyoo_artist_app_title_default": "Artificial Artist",
 	"$mol_link_source_hint": "Source code",
 	"$mol_search_Clear_hint": "Clear",
 	"$mol_search_hint": "Search..."

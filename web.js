@@ -6533,7 +6533,7 @@ var $;
 (function ($) {
     class $hyoo_artist_app extends $mol_page {
         title() {
-            return this.$.$mol_locale.text('$hyoo_artist_app_title');
+            return this.title_default();
         }
         query(next) {
             if (next !== undefined)
@@ -6628,6 +6628,9 @@ var $;
                 "Vivid"
             ];
         }
+        title_default() {
+            return this.$.$mol_locale.text('$hyoo_artist_app_title_default');
+        }
         query_changed(next) {
             if (next !== undefined)
                 return next;
@@ -6643,7 +6646,7 @@ var $;
         }
         Query() {
             const obj = new this.$.$mol_search();
-            obj.hint = () => this.$.$mol_locale.text('$hyoo_artist_app_Query_hint');
+            obj.hint = () => this.title_default();
             obj.query = (next) => this.query_changed(next);
             obj.submit = (next) => this.imagine(next);
             obj.suggests = () => this.suggests();
@@ -6810,8 +6813,8 @@ var $;
         class $hyoo_artist_app extends $.$hyoo_artist_app {
             title() {
                 if (!this.query())
-                    return super.title();
-                return `${this.query()} / ${super.title()}`;
+                    return this.title_default();
+                return `${this.query()} / ${this.title_default()}`;
             }
             query(next) {
                 return this.$.$mol_state_arg.value('', next) ?? '';

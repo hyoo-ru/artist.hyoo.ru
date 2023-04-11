@@ -310,11 +310,11 @@ $mol_infinite $mol_list
 		sub / <= after_load* null
 
 $hyoo_artist_app $mol_page
-	title @ \Artificial Artist
+	title <= title_default @ \Artificial Artist
 	query? \
 	image_size 768
 	Title <= Query $mol_search
-		hint @ \a kitten caught the dragon
+		hint <= title_default
 		query? <=> query_changed? \
 		submit? <=> imagine? null
 		suggests <= suggests /

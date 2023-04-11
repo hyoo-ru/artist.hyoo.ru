@@ -24,7 +24,6 @@ namespace $.$$ {
 			return next
 		}
 		
-		@ $mol_action
 		imagine() {
 			this.query( this.query_changed() )
 		}

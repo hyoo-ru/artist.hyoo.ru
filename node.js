@@ -7312,6 +7312,9 @@ var $;
 //hyoo/artist/app/-view.tree/app.view.tree.ts
 ;
 "use strict";
+//mol/type/immutable/deep/deep/deep.ts
+;
+"use strict";
 var $;
 (function ($) {
     function $hyoo_artist_imagine(prompt, forbid = '') {
@@ -7373,10 +7376,36 @@ var $;
             query(next) {
                 return this.$.$mol_state_arg.value('', next) ?? '';
             }
-            query_en() {
-                if (!this.query())
+            tokens() {
+                const next = {
+                    prefer: [],
+                    forbid: [],
+                };
+                const all = this.query().split(/\s+/g).filter(v => v);
+                for (const token of all) {
+                    if (token.startsWith('-')) {
+                        next.forbid.push(token.slice(1));
+                    }
+                    else {
+                        next.prefer.push(token);
+                    }
+                }
+                return next;
+            }
+            propt() {
+                return this.tokens();
+            }
+            prefer() {
+                const tokens = this.tokens().prefer;
+                if (!tokens.length)
                     return '';
-                return this.$.$hyoo_lingua_translate('en', this.query());
+                return this.$.$hyoo_lingua_translate('en', tokens.join(' '));
+            }
+            forbid() {
+                const tokens = this.tokens().forbid;
+                if (!tokens.length)
+                    return '';
+                return this.$.$hyoo_lingua_translate('en', tokens.join(' '));
             }
             query_changed(next = this.query()) {
                 if (next === '')
@@ -7394,9 +7423,9 @@ var $;
                 return next ?? [];
             }
             images_more(from) {
-                if (!this.query_en())
+                if (!this.prefer())
                     return [];
-                return [this.$.$hyoo_artist_imagine(this.query_en())];
+                return [this.$.$hyoo_artist_imagine(this.prefer(), this.forbid())];
             }
             suggests() {
                 const query = this.query_changed();
@@ -7430,7 +7459,16 @@ var $;
         ], $hyoo_artist_app.prototype, "query", null);
         __decorate([
             $mol_mem
-        ], $hyoo_artist_app.prototype, "query_en", null);
+        ], $hyoo_artist_app.prototype, "tokens", null);
+        __decorate([
+            $mol_mem
+        ], $hyoo_artist_app.prototype, "propt", null);
+        __decorate([
+            $mol_mem
+        ], $hyoo_artist_app.prototype, "prefer", null);
+        __decorate([
+            $mol_mem
+        ], $hyoo_artist_app.prototype, "forbid", null);
         __decorate([
             $mol_mem
         ], $hyoo_artist_app.prototype, "query_changed", null);

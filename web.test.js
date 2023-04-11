@@ -3807,5 +3807,8 @@ var $;
     });
 })($ || ($ = {}));
 //mol/state/arg/arg.web.test.ts
+;
+"use strict";
+//mol/type/immutable/deep/deep/deep.test.ts
 
 //# sourceMappingURL=web.test.js.map

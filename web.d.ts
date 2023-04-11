@@ -2033,6 +2033,12 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    type $mol_type_immutable_deep<Val> = {
+        readonly [field in keyof Val]: $mol_type_immutable_deep<Val[field]>;
+    };
+}
+
+declare namespace $ {
     function $hyoo_artist_imagine(this: $, prompt: string, forbid?: string): string;
 }
 
@@ -2051,7 +2057,16 @@ declare namespace $.$$ {
     class $hyoo_artist_app extends $.$hyoo_artist_app {
         title(): string;
         query(next?: string): string;
-        query_en(): string;
+        tokens(): $mol_type_immutable_deep<{
+            prefer: string[];
+            forbid: string[];
+        }>;
+        propt(): $mol_type_immutable_deep<{
+            prefer: string[];
+            forbid: string[];
+        }>;
+        prefer(): string;
+        forbid(): string;
         query_changed(next?: string): string;
         imagine(): void;
         image(uri: string): string;

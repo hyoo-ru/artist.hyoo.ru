@@ -3,8 +3,8 @@
 	"name": "$hyoo_artist",
 	"icons": [
 		{
-			"src": "../../../hyoo/artist/logo/logo.svg",
-			"type": "image/svg+xml",
+			"src": "../../../hyoo/artist/logo/logo.png",
+			"type": "image/png",
 			"sizes": "512x512"
 		}
 	],

@@ -1,3 +1,4 @@
 deploy \/hyoo/artist/app/manifest.json
 deploy \/hyoo/artist/logo/logo.svg
+deploy \/hyoo/artist/logo/logo.png
 include \/mol/offline/install

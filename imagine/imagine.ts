@@ -27,7 +27,13 @@ namespace $ {
 
 	// }
 	
-	export function $hyoo_artist_imagine( this: $, prompt: string, forbid = '' ) {
+	export function $hyoo_artist_imagine(
+		this: $,
+		prompt: string,
+		forbid = '',
+	) {
+		
+		if( !prompt ) return ''
 		
 		const space = 'ai-forever-kandinsky2-1'
 		

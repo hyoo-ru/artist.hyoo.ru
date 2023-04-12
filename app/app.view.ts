@@ -31,28 +31,20 @@ namespace $.$$ {
 		}
 		
 		@ $mol_mem
-		propt() {
-			return this.tokens()
+		prompts() {
+			const { prefer, forbid } = this.tokens()
+			return [ prefer, forbid ].map(
+				tokens => this.$.$hyoo_lingua_translate(
+					'en',
+					tokens.join( ' ' ),
+				)
+			) as [ string, string ]
 		}
 		
 		@ $mol_mem
-		prefer() {
-			const tokens = this.tokens().prefer
-			if( !tokens.length ) return ''
-			return this.$.$hyoo_lingua_translate( 'en', tokens.join( ' ' ) )
-		}
-		
-		@ $mol_mem
-		forbid() {
-			const tokens = this.tokens().forbid
-			if( !tokens.length ) return ''
-			return this.$.$hyoo_lingua_translate( 'en', tokens.join( ' ' ) )
-		}
-		
-		@ $mol_mem
-		query_changed( next = this.query() ) {
-			if( next === '' ) this.query('')
-			return next
+		query_changed( next?: string ) {
+			if( next === '' ) this.query( '' )
+			return next ?? this.query()
 		}
 		
 		imagine() {
@@ -71,8 +63,8 @@ namespace $.$$ {
 		}
 		
 		images_more( from: string | null ) {
-			if( !this.prefer() ) return []
-			return [ this.$.$hyoo_artist_imagine( this.prefer(), this.forbid() ) ]
+			const uri = this.$.$hyoo_artist_imagine( ... this.prompts() )
+			return uri ? [ uri ] : []
 		}
 		
 		@ $mol_mem

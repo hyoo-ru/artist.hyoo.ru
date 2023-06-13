@@ -7463,4 +7463,5 @@ var $;
 })($ || ($ = {}));
 //hyoo/artist/app/app.view.css.ts
 
+export default $
 //# sourceMappingURL=node.js.map

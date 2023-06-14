@@ -7274,8 +7274,8 @@ var $;
     function $hyoo_artist_imagine(prompt, forbid = '') {
         if (!prompt)
             return '';
-        const space = 'ai-forever-kandinsky2-1';
-        const path = this.$mol_huggingface_run(space, 2, prompt, forbid)[0][0].name;
+        const space = 'artgan-stable-diffusion-controlnet-webui';
+        const path = this.$mol_huggingface_run(space, 0, 'dreamlike-art/dreamlike-photoreal-2.0', prompt, forbid, 1, "DDIM", 7.5, 40, 512, 512, 0)[0][0].name;
         return `https://${space}.hf.space/file=${path}`;
     }
     $.$hyoo_artist_imagine = $hyoo_artist_imagine;

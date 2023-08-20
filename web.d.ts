@@ -244,7 +244,7 @@ declare namespace $ {
         static getter<Host, Args extends readonly unknown[], Result>(task: (this: Host, ...args: Args) => Result): (host: Host, args: Args) => $mol_wire_task<Host, Args, Result>;
         get temp(): boolean;
         complete(): void;
-        put(next: Result | Error | Promise<Result | Error>): Error | Result | Promise<Error | Result>;
+        put(next: Result | Error | Promise<Result | Error>): Result | Error | Promise<Result | Error>;
     }
 }
 
@@ -1967,7 +1967,7 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    function $hyoo_artist_imagine(this: $, prompt: string, forbid?: string): string;
+    function $hyoo_artist_imagine(this: $, prompt: string, forbid?: string): any;
 }
 
 declare namespace $ {
@@ -1994,7 +1994,7 @@ declare namespace $.$$ {
         imagine(): void;
         image(uri: string): string;
         images(next?: number[]): number[];
-        images_more(from: string | null): string[];
+        images_more(from: string | null): any[];
         suggests(): string[];
     }
 }
